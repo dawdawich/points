@@ -3,6 +3,7 @@ package com.gooldygame.point;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.SurfaceHolder;
+import android.widget.LinearLayout;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -13,15 +14,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        new Thread(() -> {
-            for (int i = 0; i < 10; i++) {
+        TestObject gameView = new TestObject(this); // создаём gameView
 
-                try {
-                    Thread.sleep(1500);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
+        LinearLayout gameLayout = findViewById(R.id.gameLayout); // находим gameLayout
+        gameLayout.addView(gameView); // и добавляем в него gameView
+
     }
 }
