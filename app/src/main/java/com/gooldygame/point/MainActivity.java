@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        TestObject gameView = new TestObject(this); // создаём gameView
+        GameView gameView = new GameView(this); // создаём gameView
 
         LinearLayout gameLayout = findViewById(R.id.gameLayout); // находим gameLayout
         gameLayout.addView(gameView); // и добавляем в него gameView

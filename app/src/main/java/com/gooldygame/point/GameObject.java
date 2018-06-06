@@ -6,31 +6,30 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 
-import java.util.ArrayList;
-
-public class Body {
+public class GameObject {
 
     protected float x; // координаты
     protected float y;
-    protected float size = 5; // размер
-    protected float speed; // скорость
+    protected float size; // размер
     protected int bitmapId; // id картинки
     protected Bitmap bitmap; // картинка
 
+    public GameObject(float x, float y, float size, int bitmapId) {
+        this.x = x * GameView.unitW;
+        this.y = y * GameView.unitH;
+        this.size = size;
+        this.bitmapId = bitmapId;
+    }
 
     void init(Context context) { // сжимаем картинку до нужных размеров
-        bitmapId = R.drawable.round;
         Bitmap cBitmap = BitmapFactory.decodeResource(context.getResources(), bitmapId);
         bitmap = Bitmap.createScaledBitmap(
-                cBitmap, (int)(size * TestObject.unitW), (int)(size * TestObject.unitH), false);
+                cBitmap, (int)(size * GameView.unitW), (int)(size * GameView.unitH), false);
         cBitmap.recycle();
     }
 
-    void update(){ // тут будут вычисляться новые координаты
-    }
-
-    void drow(Paint paint, Canvas canvas){ // рисуем картинку
-        canvas.drawBitmap(bitmap, x*TestObject.unitW, y*TestObject.unitH, paint);
+    void draw(Paint paint, Canvas canvas){ // рисуем картинку
+        canvas.drawBitmap(bitmap, x, y, paint);
     }
 
 }
