@@ -36,6 +36,7 @@ public class GameView extends SurfaceView implements Runnable {
         //инициализируем обьекты для рисования
         surfaceHolder = getHolder();
         paint = new Paint();
+        paint.setColor(Color.GREEN);
 
         // инициализируем поток
         gameThread = new Thread(this);
@@ -58,16 +59,27 @@ public class GameView extends SurfaceView implements Runnable {
         }
     }
 
+    //TODO: find the cause of slow processing
     private void draw() {
         if (surfaceHolder.getSurface().isValid()) {  //проверяем валидный ли surface
 
+            long sec = System.currentTimeMillis();
             if(firstTime){ // инициализация при первом запуске
                 firstTime = false;
                 unitW = surfaceHolder.getSurfaceFrame().width()/maxX; // вычисляем число пикселей в юните
                 unitH = surfaceHolder.getSurfaceFrame().height()/maxY;
+                for (int i = 0; i < maxY; i++) {
+                    for (int j = 0; j < maxX; j++) {
+                        Round round = new Round(j, i, 1, R.drawable.round);
+                        round.init(getContext());
+                        rounds.add(round);
+                    }
+                }
 
 //                ship = new Ship(getContext()); // добавляем корабль
             }
+
+            sec = System.currentTimeMillis() - sec;
 
             Random random = new Random();
 
@@ -81,10 +93,12 @@ public class GameView extends SurfaceView implements Runnable {
 
 
 //            ship.drow(paint, canvas); // рисуем корабль
-            Round round = new Round(x, y, 1, R.drawable.round);
-            round.init(getContext());
-            rounds.add(round);
+
+//            Round round = new Round(x, y, 1, R.drawable.round);
+//            round.init(getContext());
+//            rounds.add(round);
             for (Round r : rounds) {
+//                paint.setColor(Color.rgb(random.nextInt(255), random.nextInt(255), random.nextInt(255)));
                 r.draw(paint, canvas);
             }
 
