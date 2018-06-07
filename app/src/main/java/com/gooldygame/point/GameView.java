@@ -59,7 +59,6 @@ public class GameView extends SurfaceView implements Runnable {
         }
     }
 
-    //TODO: find the cause of slow processing
     private void draw() {
         if (surfaceHolder.getSurface().isValid()) {  //проверяем валидный ли surface
 
